@@ -3,12 +3,19 @@ package helpers;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 
+import org.aeonbits.owner.ConfigFactory;
+import owner.CredentialsConfig;
+
 public class Browserstack {
   public static String videoUrl(String sessionId) {
+    CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
+    String login = config.login();
+    String password = config.password();
+
     String url = format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
 
     return given()
-        .auth().basic("bsuser_fLxezH", "Wak27qcXqmPgiapRavdG")
+        .auth().basic(login, password)
         .log().all()
         .when()
         .get(url)

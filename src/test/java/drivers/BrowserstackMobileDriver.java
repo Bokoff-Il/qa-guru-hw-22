@@ -3,23 +3,30 @@ package drivers;
 import com.codeborne.selenide.WebDriverProvider;
 import java.net.MalformedURLException;
 import java.net.URL;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import owner.CredentialsConfig;
 
 public class BrowserstackMobileDriver implements WebDriverProvider {
 
   @Override
   public WebDriver createDriver(Capabilities capabilities) {
+    CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
+    String login = config.login();
+    String password = config.password();
+    String app = config.app();
+
     MutableCapabilities mutableCapabilities = new MutableCapabilities();
     mutableCapabilities.merge(capabilities);
 
-    mutableCapabilities.setCapability("browserstack.user", "bsuser_fLxezH");
-    mutableCapabilities.setCapability("browserstack.key", "Wak27qcXqmPgiapRavdG");
+    mutableCapabilities.setCapability("browserstack.user", login);
+    mutableCapabilities.setCapability("browserstack.key", password);
 
     // Set URL of the application under test
-    mutableCapabilities.setCapability("app", "bs://4e029172612c17380c5adc904c40727a7b177306");
+    mutableCapabilities.setCapability("app", app);
 
     // Specify device and os_version for testing
     mutableCapabilities.setCapability("device", "Google Pixel 3");
