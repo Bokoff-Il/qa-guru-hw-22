@@ -8,31 +8,22 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import owner.CredentialsConfig;
+import owner.BrowserstackConfig;
 
 public class BrowserstackMobileDriver implements WebDriverProvider {
 
   @Override
   public WebDriver createDriver(Capabilities capabilities) {
-    CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
-    String login = config.login();
-    String password = config.password();
-    String app = config.app();
+    BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
 
     MutableCapabilities mutableCapabilities = new MutableCapabilities();
     mutableCapabilities.merge(capabilities);
 
-    mutableCapabilities.setCapability("browserstack.user", login);
-    mutableCapabilities.setCapability("browserstack.key", password);
-
-    // Set URL of the application under test
-    mutableCapabilities.setCapability("app", app);
-
-    // Specify device and os_version for testing
-    mutableCapabilities.setCapability("device", "Google Pixel 3");
-    mutableCapabilities.setCapability("os_version", "9.0");
-
-    // Set other BrowserStack capabilities
+    mutableCapabilities.setCapability("browserstack.user",  config.login());
+    mutableCapabilities.setCapability("browserstack.key", config.password());
+    mutableCapabilities.setCapability("app", config.app());
+    mutableCapabilities.setCapability("device", config.device());
+    mutableCapabilities.setCapability("os_version", config.version());
     mutableCapabilities.setCapability("project", "qa-guru-hw-21");
     mutableCapabilities.setCapability("build", "browserstack-build-1");
     mutableCapabilities.setCapability("name", "selenide android test");

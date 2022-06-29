@@ -8,6 +8,7 @@ import static io.qameta.allure.Allure.step;
 import com.codeborne.selenide.CollectionCondition;
 import io.appium.java_client.AppiumBy;
 import org.junit.jupiter.api.Test;
+import test.TestBase;
 
 
 class SearchTest extends TestBase {

@@ -4,11 +4,11 @@ import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 
 import org.aeonbits.owner.ConfigFactory;
-import owner.CredentialsConfig;
+import owner.BrowserstackConfig;
 
 public class Browserstack {
   public static String videoUrl(String sessionId) {
-    CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
+    BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
     String login = config.login();
     String password = config.password();
 

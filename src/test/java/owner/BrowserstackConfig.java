@@ -4,9 +4,9 @@ import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 
 @Sources({
-    "classpath:credentials.properties"
+    "classpath:browserstack.properties"
 })
-public interface CredentialsConfig extends Config {
+public interface BrowserstackConfig extends Config {
 
   @Key("login")
   String login();
@@ -16,4 +16,10 @@ public interface CredentialsConfig extends Config {
 
   @Key("app")
   String app();
+
+  @Key("device")
+  String device();
+
+  @Key("version")
+  String version();
 }
